@@ -1,0 +1,17 @@
+.a-icon {
+  height: var(--icon-size);
+  width: var(--icon-size);
+  display: block;
+  background: {
+    image: var(--icon);
+    position: center;
+    size: contain;
+    repeat: no-repeat;
+  };
+  &.-aperture {
+    --icon: url('../assets/icons/aperture.svg')
+  }
+  &.-plus-circle {
+    --icon: url('../assets/icons/plus-circle.svg')
+  }
+}

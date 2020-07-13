@@ -36,12 +36,12 @@ export class SmoothModule {
     }
 
     private _preload () {
-      this._setHeight()
+      this.setHeight()
     }
 
     private _on () {
-      this._setStyles()
-      this._setHeight()
+      // this._setStyles()
+      this.setHeight()
       this._addEvents()
       requestAnimationFrame()
     }
@@ -65,23 +65,23 @@ export class SmoothModule {
       window.cancelAnimationFrame(this.rAF)
     }
 
-    private _setHeight () {
+    public setHeight () {
       document.body.style.height = `${dom.content.getBoundingClientRect().width}px`
     }
 
-    private _setStyles () {
-      Object.assign(dom.el.style, {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        height: '100%',
-        width: '100%',
-        overflow: 'hidden'
-      })
-    }
+    // private _setStyles () {
+    //   Object.assign(dom.el.style, {
+    //     position: 'fixed',
+    //     top: 0,
+    //     left: '25%',
+    //     height: '100%',
+    //     width: '100%',
+    //     overflow: 'hidden'
+    //   })
+    // }
 
     private _resize () {
-      this._setHeight()
+      this.setHeight()
       data.rounded = data.last = data.current
     }
 

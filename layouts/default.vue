@@ -1,5 +1,6 @@
 <template>
   <div>
+    <wd-header/>
     <Nuxt />
     <mouse-cursor :color="'#043353'" :point-size="12" />
   </div>
@@ -11,8 +12,9 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator'
 import MouseCursor from '~/components/shared/MouseCursor'
+import wdHeader from '~/components/molecules/Header'
 @Component({
-  components: { MouseCursor }
+  components: { wdHeader, MouseCursor }
 })
 export default class Default extends Vue {
 }

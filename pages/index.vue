@@ -41,6 +41,10 @@ import PasswordModule from '~/modules/shared/Password.module'
 export default class Index extends Vue {
   protected message: string = '';
 
+  mounted () {
+    this._authStateChanged()
+  }
+
   get password (): string {
     return this.$store.state.user.pass
   }
@@ -51,10 +55,31 @@ export default class Index extends Vue {
 
   protected checkPassword () {
     if (new PasswordModule(this.password || '').isValid) {
-      this.$router.push({ name: 'home' })
+      this.password = ''
+      this._anonymously()
       return
     }
     this.message = 'The password is incorrect'
+  }
+
+  private async _anonymously () {
+    await this.$fireAuth.signInAnonymously().catch((error) => {
+      console.error('Error with code: ', error.code)
+      console.error('Error message: ', error.message)
+    })
+  }
+
+  private async _authStateChanged () {
+    await this.$fireAuth.onAuthStateChanged((user) => {
+      if (user) {
+        user.getIdToken().then((token) => {
+          this.$store.commit('user/SET_TOKEN', token)
+        })
+        this.$store.commit('user/SET_NAME', user.displayName)
+        this.$store.commit('user/SET_NAME', user.photoURL)
+        this.$router.push({ name: 'home' })
+      }
+    })
   }
 }
 </script>

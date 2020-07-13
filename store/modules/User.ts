@@ -11,6 +11,15 @@ export const user = {
   mutations: {
     SET_PASSWORD (state: any, password: string) {
       state.pass = password
+    },
+    SET_TOKEN (state: any, token: string) {
+      state.token = token
+    },
+    SET_NAME (state: any, name: string) {
+      state.name = name
+    },
+    SET_PHOTO (state: any, photo: string) {
+      state.photo = photo
     }
   },
   getters: {},

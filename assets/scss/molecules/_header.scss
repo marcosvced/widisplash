@@ -1,0 +1,26 @@
+.m-header--container {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+
+  span {
+    cursor: pointer;
+    position: relative;
+
+    &:before {
+      content: "";
+      width: 0;
+      height: 3px;
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      background: $c-dark;
+      transition: width .6s ease-in-out;
+    }
+
+    &:hover:before {
+      width: 100%;
+    }
+  }
+}

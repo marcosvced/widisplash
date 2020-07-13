@@ -1,12 +1,18 @@
-body  {
+:root {
+  --icon-size: 35px;
+}
+
+body {
   font: {
     family: "Noto Sans";
     weight: normal;
   };
 }
+
 h1 {
   color: $c-dark;
 }
+
 ::-webkit-scrollbar {
   width: 7px;
 }

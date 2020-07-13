@@ -1,19 +1,24 @@
-/* width */
+body  {
+  font: {
+    family: "Noto Sans";
+    weight: normal;
+  };
+}
+h1 {
+  color: $c-dark;
+}
 ::-webkit-scrollbar {
   width: 7px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   background: inherit;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: darken($c-dark, 10%);
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: $c-dark;
 }

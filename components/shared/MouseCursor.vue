@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="!hideCursor"
     id="mouse-cursor"
     :class="[ 'cursor', { 'cursor-hover': mouseState },
               {'cursor-hidden': hideCursor}, {'cursor-dark': !isBackgroundDark} ]"
@@ -39,13 +40,8 @@ export default class MouseCursor extends Vue {
   }
 
   moveCursor ($event: MouseEvent) {
-    // window.requestAnimationFrame(this.moveCursor)
     this.xChild = $event.clientX
     this.yChild = $event.clientY
-    // setTimeout(() => {
-    //   this.xParent = $event.clientX - 20
-    //   this.yParent = $event.clientY - 20
-    // }, 50)
   }
 
   private _isMobile () {

@@ -1,0 +1,21 @@
+#button {
+  &.a-btn {
+    background: {
+      color: $c-primary;
+    };
+    padding: {
+      top: $layout-grid-gutter * .6;
+      right: $layout-grid-gutter;
+      bottom: $layout-grid-gutter * .6;
+      left: $layout-grid-gutter;
+    }
+    color: white;
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow .4s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 15px 30px rgba($c-primary, .16);
+    }
+  }
+}

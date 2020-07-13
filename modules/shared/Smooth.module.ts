@@ -1,112 +1,109 @@
+
 let data: any = null
 let dom: any = null
 let requestAnimationFrame: (args?: any) => void
-let setHeight: (args?: any) => void
 
 export class SmoothModule {
-  private _rAF!: any;
+    private _rAF!: any;
 
-  constructor (el: HTMLElement, content: HTMLElement) {
-    data = {
-      ease: 0.08,
-      current: 0,
-      last: 0,
-      rounded: 0
+    constructor (el:HTMLElement, content:HTMLElement) {
+      data = {
+        ease: 0.08,
+        current: 0,
+        last: 0,
+        rounded: 0
+      }
+      dom = {
+        el,
+        content
+      }
+      this._bindMethods()
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      requestAnimationFrame = (args?: any) => {
+        this.rAF = window.requestAnimationFrame(this._run)
+      }
+      this._init()
     }
-    dom = {
-      el,
-      content
+
+    private _init () {
+      this._preload()
+      this._on()
     }
-    this._bindMethods()
+
+    private _bindMethods () {
+      // eslint-disable-next-line no-return-assign
+      [this._scroll, this._run, this._resize].forEach(fn => fn = fn.bind(this))
+    }
+
+    private _preload () {
+      this._setHeight()
+    }
+
+    private _on () {
+      this._setStyles()
+      this._setHeight()
+      this._addEvents()
+      requestAnimationFrame()
+    }
+
+    public off () {
+      this._cancelAnimationFrame()
+      this._removeEvents()
+    }
+
+    private _run () {
+      data.last += (data.current - data.last) * data.ease
+      data.rounded = Math.round(data.last * 100) / 100
+
+      dom.content.style.transform = `translate3d(-${data.rounded}px, 0, 0)`
+
+      requestAnimationFrame()
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    requestAnimationFrame = (args?: any) => {
-      this.rAF = window.requestAnimationFrame(this._run)
+    private _cancelAnimationFrame (args?: any) {
+      window.cancelAnimationFrame(this.rAF)
     }
-    setHeight = () => {
+
+    private _setHeight () {
       document.body.style.height = `${dom.content.getBoundingClientRect().width}px`
     }
-    this._init()
-  }
 
-  private _init () {
-    this._preload()
-    this._on()
-  }
+    private _setStyles () {
+      Object.assign(dom.el.style, {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+        overflow: 'hidden'
+      })
+    }
 
-  private _bindMethods () {
-    // eslint-disable-next-line no-return-assign
-    [this._scroll, this._run, this._resize].forEach(fn => fn = fn.bind(this))
-  }
+    private _resize () {
+      this._setHeight()
+      data.rounded = data.last = data.current
+    }
 
-  private _preload () {
-    this._setHeight()
-  }
+    private _scroll () {
+      data.current = window.scrollY
+    }
 
-  private _on () {
-    this._setStyles()
-    this._setHeight()
-    this._addEvents()
-    requestAnimationFrame()
-  }
+    private _addEvents () {
+      window.addEventListener('resize', this._resize, { passive: true })
+      window.addEventListener('scroll', this._scroll, { passive: true })
+    }
 
-  public off () {
-    this._cancelAnimationFrame()
-    this._removeEvents()
-  }
+    private _removeEvents () {
+      window.removeEventListener('resize', this._resize)
+      window.removeEventListener('scroll', this._scroll)
+    }
 
-  private _run () {
-    data.last += (data.current - data.last) * data.ease
-    data.rounded = Math.round(data.last * 100) / 100
+    get rAF (): any {
+      return this._rAF
+    }
 
-    dom.content.style.transform = `translate3d(-${data.rounded}px, 0, 0)`
-
-    requestAnimationFrame()
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private _cancelAnimationFrame (args?: any) {
-    window.cancelAnimationFrame(this.rAF)
-  }
-
-  private _setHeight () {
-    setHeight()
-  }
-
-  private _setStyles () {
-    Object.assign(dom.el.style, {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      height: '100%',
-      width: '100%',
-      overflow: 'hidden'
-    })
-  }
-
-  private _resize () {
-    setHeight()
-    data.rounded = data.last = data.current
-  }
-
-  private _scroll () {
-    data.current = window.scrollY
-  }
-
-  private _addEvents () {
-    window.addEventListener('resize', this._resize, { passive: true })
-    window.addEventListener('scroll', this._scroll, { passive: true })
-  }
-
-  private _removeEvents () {
-    window.removeEventListener('resize', this._resize)
-    window.removeEventListener('scroll', this._scroll)
-  }
-
-  get rAF (): any {
-    return this._rAF
-  }
-
-  set rAF (value: any) {
-    this._rAF = value
-  }
+    set rAF (value: any) {
+      this._rAF = value
+    }
 }

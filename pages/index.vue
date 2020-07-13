@@ -1,61 +1,78 @@
 <template>
-  <smooth-scroll>
-    <div class="o-photos -display-row">
-      <div
-        v-for="item in list"
-        :key="item.id"
-        class="a-photos__photo -mr-1 "
-        :style="`--src:url('${item.url}')`"
+  <div class="o-login--container">
+    <div class="m-login__wrapper -col-6">
+      <h1 class="a-login__title -mb-3">
+        Login
+      </h1>
+      <wd-input
+        :input-id="'user'"
+        :value="'Stitch'"
+        :label="'User name'"
+        :placeholder="'Writter your user name'"
+        :type="'text'"
+        class="-mb-1"
+        disabled
       />
+      <wd-input
+        :input-id="'password'"
+        :value="password"
+        :label="'Password'"
+        :placeholder="'Writter your password'"
+        :type="'password'"
+        :message="message"
+        class="-mb-2"
+        @input="password = $event"
+      />
+      <wd-button :text="'Sing in'" @click="checkPassword()" />
     </div>
-  </smooth-scroll>
+  </div>
 </template>
 
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-
-import PhotoModule from '~/modules/atoms/Photo.module'
-import SmoothScroll from '~/components/shared/SmoothScroll.vue'
-import UnsplashModule from '~/modules/shared/Unsplash.module'
+import wdInput from '~/components/atoms/Input.vue'
+import wdButton from '~/components/atoms/Button.vue'
+import PasswordModule from '~/modules/shared/Password.module'
 
 @Component({
-  components: { SmoothScroll }
-  /* async data () {
-    await new UnsplashModule(process.env.ACCESS_KEY || '').search().then((response) => {
-      return {
-        list: response
-      }
-    })
-  },
-  middleware: 'Photos' */
+  components: { wdButton, wdInput }
 })
 export default class Index extends Vue {
-  protected list: PhotoModule[] = [];
+  protected message: string = '';
 
-  beforeCreate () {
-    new UnsplashModule(process.env.ACCESS_KEY || '').search().then((response) => {
-      this.list = response
-    })
+  get password (): string {
+    return this.$store.state.user.pass
+  }
+
+  set password (value: string) {
+    this.$store.commit('user/SET_PASSWORD', value)
+  }
+
+  protected checkPassword () {
+    if (new PasswordModule(this.password || '').isValid) {
+      this.$router.push({ name: 'home' })
+      return
+    }
+    this.message = 'The password is incorrect'
   }
 }
 </script>
 
 <style lang="scss">
-.o-photos {
-  width: fit-content;
-}
-
-.a-photos__photo {
-  height: 80vh;
-  width: 30vw;
+.o-login--container {
+  position: relative;
+  height: 100vh;
   overflow: hidden;
-  background: {
-    image: var(--src);
-    position: center;
-    size: cover;
-    repeat: no-repeat;
-  };
-  flex: 1 0 auto;
+
+  .m-login__wrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -#{2*3}rem;
+    bottom: 0;
+    margin: auto;
+    height: fit-content;
+  }
 }
 </style>

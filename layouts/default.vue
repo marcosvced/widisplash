@@ -11,7 +11,6 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator'
 import MouseCursor from '~/components/shared/MouseCursor'
-
 @Component({
   components: { MouseCursor }
 })

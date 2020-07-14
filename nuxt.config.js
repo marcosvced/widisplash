@@ -111,5 +111,8 @@ export default {
   },
   env: {
     ACCESS_KEY: process.env.UNSHPLASH_ACCESS_KEY || ''
+  },
+  generate: {
+    fallback: true
   }
 }

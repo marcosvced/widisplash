@@ -9,14 +9,15 @@ export default class UnsplashModule {
     this._unsplash = new Unsplash({ accessKey })
   }
 
-  public search (args: any = DEFAULT_SEARCH): Promise<PhotoModule[]> {
+  public search (store: any, args: any = DEFAULT_SEARCH) {
     return new Promise((resolve) => {
-      this._unsplash.search.photos(args, 1, 15, { orientation: 'landscape' })
+      this._unsplash.photos.getRandomPhoto({ query: args })
         .then(toJson)
         .then((response: any) => {
           if (response) {
-            resolve(this._getPhotoList(response.results))
+            store.commit('photos/SET_PHOTOS', [UnsplashModule._getPhoto(response)])
           }
+          resolve(true)
         })
     })
   }

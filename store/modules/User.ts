@@ -23,5 +23,12 @@ export const user = {
     }
   },
   getters: {},
-  actions: {}
+  actions: {
+    CLEAR (context: any) {
+      context.commit('SET_NAME', undefined)
+      context.commit('SET_PASSWORD', undefined)
+      context.commit('SET_PHOTO', undefined)
+      context.commit('SET_TOKEN', undefined)
+    }
+  }
 }

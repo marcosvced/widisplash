@@ -1,4 +1,3 @@
-
 let data: any = null
 let dom: any = null
 let requestAnimationFrame: (args?: any) => void
@@ -49,6 +48,7 @@ export class SmoothModule {
     public off () {
       this._cancelAnimationFrame()
       this._removeEvents()
+      document.body.removeAttribute('style')
     }
 
     private _run () {
@@ -68,17 +68,6 @@ export class SmoothModule {
     public setHeight () {
       document.body.style.height = `${dom.content.getBoundingClientRect().width}px`
     }
-
-    // private _setStyles () {
-    //   Object.assign(dom.el.style, {
-    //     position: 'fixed',
-    //     top: 0,
-    //     left: '25%',
-    //     height: '100%',
-    //     width: '100%',
-    //     overflow: 'hidden'
-    //   })
-    // }
 
     private _resize () {
       this.setHeight()

@@ -1,9 +1,10 @@
 <template>
   <div
     id="button"
+    v-hover
     :class="['a-btn -text-center', 'a-btn__wrapper',`a-btn--${btnType}`]"
-    @click="onClick"
     :disabled="disabled"
+    @click="onClick"
   >
     <span class="a-content">{{ text }}</span>
   </div>

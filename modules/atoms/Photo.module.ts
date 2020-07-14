@@ -1,6 +1,6 @@
 export default interface PhotoModule {
-  id: string;
+  id?: string;
   url: string;
-  abstract: string;
-  name: string;
+  abstract?: string;
+  name?: string;
 }

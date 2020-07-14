@@ -1,6 +1,6 @@
 <template>
   <div class="o-login--container">
-    <div class="m-login__wrapper -col-6">
+    <div class="m-login__wrapper -col-5">
       <h1 class="a-login__title -mb-3">
         Login
       </h1>
@@ -34,6 +34,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import wdInput from '~/components/atoms/Input.vue'
 import wdButton from '~/components/atoms/Button.vue'
 import PasswordModule from '~/modules/shared/Password.module'
+import FirebaseModule from '~/modules/shared/Firebase.module'
 
 @Component({
   components: { wdButton, wdInput }
@@ -41,8 +42,13 @@ import PasswordModule from '~/modules/shared/Password.module'
 export default class Index extends Vue {
   protected message: string = '';
 
-  mounted () {
-    this._authStateChanged()
+  protected checkPassword () {
+    if (new PasswordModule(this.password || '').isValid) {
+      FirebaseModule.anonymously()
+      this.password = ''
+      return
+    }
+    this.message = 'The password isn\'t valid'
   }
 
   get password (): string {
@@ -51,35 +57,6 @@ export default class Index extends Vue {
 
   set password (value: string) {
     this.$store.commit('user/SET_PASSWORD', value)
-  }
-
-  protected checkPassword () {
-    if (new PasswordModule(this.password || '').isValid) {
-      this.password = ''
-      this._anonymously()
-      return
-    }
-    this.message = 'The password is incorrect'
-  }
-
-  private async _anonymously () {
-    await this.$fireAuth.signInAnonymously().catch((error) => {
-      console.error('Error with code: ', error.code)
-      console.error('Error message: ', error.message)
-    })
-  }
-
-  private async _authStateChanged () {
-    await this.$fireAuth.onAuthStateChanged((user) => {
-      if (user) {
-        user.getIdToken().then((token) => {
-          this.$store.commit('user/SET_TOKEN', token)
-        })
-        this.$store.commit('user/SET_NAME', user.displayName)
-        this.$store.commit('user/SET_NAME', user.photoURL)
-        this.$router.push({ name: 'home' })
-      }
-    })
   }
 }
 </script>

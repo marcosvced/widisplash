@@ -2,11 +2,10 @@
   <div
     v-show="!hideCursor"
     id="mouse-cursor"
-    :class="[ 'cursor', { 'cursor-hover': mouseState },
-              {'cursor-hidden': hideCursor}, {'cursor-dark': !isBackgroundDark} ]"
+    :class="[ 'cursor', { 'cursor-hover': mouseState }, {'cursor-hidden': hideCursor} ]"
     :style="`--point-color:${color}`"
   >
-    <div ref="point" class="cursor__point" :style="`--point:${pointSize}px; ${cursorPoint}`" />
+    <div ref="point" class="cursor__point" :style="`${cursorPoint}`" />
   </div>
 </template>
 
@@ -65,7 +64,11 @@ export default class MouseCursor extends Vue {
   }
 
   get cursorPoint (): string {
-    return `transform: translate3d(${this.xChild - (this.pointSize / 2)}px, ${this.yChild - (this.pointSize / 2)}px, 0);`
+    const size: number = this.pointSize * 2
+    if (this.mouseState) {
+      return `transform: translate3d(${this.xChild - (size / 2)}px, ${this.yChild - (size / 2)}px, 15px) scale(1); --point:${size}px;`
+    }
+    return `transform: translate3d(${this.xChild - (size / 2)}px, ${this.yChild - (size / 2)}px, 0) scale(.5); --point:${size}px;`
   }
 
   get mouseState (): boolean {
@@ -81,4 +84,6 @@ export default class MouseCursor extends Vue {
 
 <style scoped lang="scss">
 @import "assets/scss/atoms/mouse";
+
+
 </style>

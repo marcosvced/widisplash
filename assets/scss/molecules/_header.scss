@@ -4,6 +4,10 @@
   left: 0;
   right: 0;
 
+  .a-header__icon > .-center{
+    margin: auto;
+  }
+
   span {
     cursor: pointer;
     position: relative;
@@ -11,12 +15,13 @@
     &:before {
       content: "";
       width: 0;
-      height: 3px;
+      height: 10px;
       position: absolute;
       left: 0;
-      bottom: -5px;
-      background: $c-dark;
-      transition: width .6s ease-in-out;
+      bottom: 0;
+      background: $c-light;
+      z-index: -1;
+      transition: width .4s ease-in-out;
     }
 
     &:hover:before {

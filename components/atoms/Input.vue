@@ -2,9 +2,9 @@
   <div id="input" class="m-input -display-column">
     <label class="a-input__label" :for="inputId">{{ label }}</label>
     <input
+      :id="inputId"
       v-model="inputVal"
       class="a-input__input"
-      :id="inputId"
       :type="type"
       :placeholder="placeholder"
     >

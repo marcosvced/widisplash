@@ -28,27 +28,6 @@ $top_index: 1000;
     }
   }
 
-/*  &__circle {
-    pointer-events: none;
-    user-select: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: $s_circle;
-    height: $s_circle;
-    z-index: $top_index;
-    opacity: .5;
-
-    > svg path {
-      fill: transparent;
-      stroke: var(--point-color);
-      transition: {
-        property: all;
-        duration: .6s;
-        timing-function: ease;
-      };
-    }
-  }*/
 
   &__point {
     top: 0;
@@ -67,16 +46,12 @@ $top_index: 1000;
     z-index: $top_index;
     backface-visibility: hidden;
     will-change: transform;
-    transition: opacity .3s ease;
   }
 
   &-hover {
-    .cursor {
-      &__circle {
-        > svg path {
-          fill: var(--point-color);
-        }
-      }
+    .cursor__point {
+      opacity: .3;
     }
   }
 }
+

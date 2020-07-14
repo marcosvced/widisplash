@@ -1,0 +1,57 @@
+$top_index: 1000;
+//$s_circle: 30px;
+
+.cursor {
+  position: absolute;
+  $this: &;
+
+  &-hidden {
+    opacity: 0;
+    width: 60px;
+    height: 60px;
+    transition: all .6s ease;
+  }
+
+  &-dark {
+    #{$this}__circle > svg > path {
+      stroke: #000;
+    }
+
+    #{$this}__point {
+      background: black;
+    }
+
+    &.cursor-hover {
+      #{$this}__circle > svg > path {
+        fill: #000;
+      }
+    }
+  }
+
+
+  &__point {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: var(--point);
+    height: var(--point);
+    pointer-events: none;
+    user-select: none;
+    border: {
+      radius: 50%;
+      color: var(--point-color);
+      style: solid;
+      width: 2px;
+    }
+    z-index: $top_index;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  &-hover {
+    .cursor__point {
+      opacity: .3;
+    }
+  }
+}
+

@@ -1,0 +1,145 @@
+.a-photos__wrapper {
+  width: 35vw;
+  height: 80vh;
+
+  .a-photos__photo {
+    flex: 1 0 auto;
+    height: 100%;
+    overflow: hidden;
+    background: {
+      image: var(--src);
+      position: center;
+      size: cover;
+      repeat: no-repeat;
+    };
+
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    transition: width .4s ease-in-out;
+
+    &:before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: white;
+      opacity: .65;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transition: opacity .4s ease-in-out;
+
+    }
+  }
+
+  h1 {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    font: {
+      size: 3rem;
+    };
+  }
+
+  .a-photos__abstract {
+    position: absolute;
+    bottom: 10%;
+    text-transform: uppercase;
+    left: 0;
+    line-height: 1.5;
+  }
+  h1,
+  .a-photos__abstract {
+    opacity: 1;
+    transition: all .6s ease-in-out;
+  }
+  &:hover {
+    .a-photos__photo {
+      width: 100%;
+
+      &:before {
+        opacity: 0;
+      }
+    }
+    h1,
+    .a-photos__abstract {
+      opacity: 0;
+    }
+  }
+}
+.a-photos__photo {
+  &.-random,
+  &.-upload {
+    min-height: 80vh;
+    width: 30vw;
+    background: {
+      color: $c-light;
+    };
+    position: relative;
+    transition: transform .6s ease-in-out;
+
+    span {
+      color: $c-dark;
+      font: {
+        size: 1.2rem;
+      };
+
+    }
+
+    input {
+      height: 100%;
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .m-upload__wrapper {
+      transition: transform .4s ease-in-out;
+    }
+
+    .a-progress {
+      height: 7px;
+      position: absolute;
+
+      &:after,
+      &:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: width .6s ease-in-out;
+      }
+
+      &:before {
+        background: darken($c-light, 10);
+      }
+
+      &:after {
+        width: var(--progress);
+        background: $c-dark;
+      }
+    }
+
+    &:hover {
+      .m-upload__wrapper {
+        transform: scale(1.1);
+      }
+    }
+  }
+  &.-random {
+    background: {
+      color: $c-medium-light;
+    };
+    cursor: pointer;
+    span {
+      color: darken($c-medium-light, 35);
+    }
+    .-plus-circle {
+
+    }
+  }
+}
+

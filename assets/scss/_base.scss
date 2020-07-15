@@ -12,7 +12,9 @@ p,
 h1 {
   color: $c-dark;
 }
-
+[class*='-col-'] {
+  transition: width .3s ease-in-out;
+}
 ::-webkit-scrollbar {
   width: 7px;
 }

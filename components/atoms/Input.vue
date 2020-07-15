@@ -3,6 +3,7 @@
     <label class="a-input__label" :for="inputId">{{ label }}</label>
     <input
       :id="inputId"
+      ref="test"
       v-model="inputVal"
       class="a-input__input"
       :type="type"
@@ -29,6 +30,7 @@ export default class SxInput extends Vue {
 
   set inputVal (val) {
     this.$emit('input', val)
+    this.$forceUpdate()
   }
 };
 </script>

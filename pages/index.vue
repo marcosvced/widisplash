@@ -56,7 +56,7 @@ export default class Index extends Vue {
   }
 
   set password (value: string) {
-    this.$store.commit('user/SET_PASSWORD', value)
+    this.$store.commit('user/SET_PASSWORD', PasswordModule.areCharacterValid(value) ? value : PasswordModule.removeInvalidCharacters(value))
   }
 }
 </script>

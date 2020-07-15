@@ -1,10 +1,6 @@
 import { OPPOSITES_SYMBOLS, OPEN_PARENTHESIS, OPEN_BRACKETS, OPEN_BRACES } from '~/constants/Password.const'
 
 export default class PasswordModule extends String {
-  constructor (characters: string) {
-    super(characters)
-  }
-
   public get value () {
     return this.toString()
   }

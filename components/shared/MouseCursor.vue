@@ -83,7 +83,7 @@ export default class MouseCursor extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "assets/scss/atoms/mouse";
+@import "../../assets/scss/shared/mouse";
 
 
 </style>

@@ -1,6 +1,7 @@
 .a-photos__wrapper {
-  width: 35vw;
-  height: 80vh;
+  width: $photo-width;
+  height: $photo-height;
+  min-width: $photo-min-width;
 
   .a-photos__photo {
     flex: 1 0 auto;
@@ -48,11 +49,13 @@
     left: 0;
     line-height: 1.5;
   }
+
   h1,
   .a-photos__abstract {
     opacity: 1;
     transition: all .6s ease-in-out;
   }
+
   &:hover {
     .a-photos__photo {
       width: 100%;
@@ -61,12 +64,14 @@
         opacity: 0;
       }
     }
+
     h1,
     .a-photos__abstract {
       opacity: 0;
     }
   }
 }
+
 .a-photos__photo {
   &.-random,
   &.-upload {
@@ -129,14 +134,17 @@
       }
     }
   }
+
   &.-random {
     background: {
       color: $c-medium-light;
     };
     cursor: pointer;
+
     span {
-      color: darken($c-medium-light, 35);
+      color: darken($c-darken-medium-light, 35);
     }
+
     .-plus-circle {
 
     }

@@ -32,7 +32,7 @@ export default class SmoothScroll extends Vue {
 .o-scroll {
   position: fixed;
   top: 5%;
-  left: 10vw;
+  left: 0;
   bottom: 0;
   margin: auto;
   width: 100%;
@@ -50,8 +50,8 @@ export default class SmoothScroll extends Vue {
 
   .o-scroll__content {
     width: fit-content;
-    position: relative;
-    left: 15%;
+    padding-left: 15%;
+    padding-right: 5%;
   }
 
 }

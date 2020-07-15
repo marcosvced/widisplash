@@ -34,7 +34,7 @@
     transition: border .3s ease-in-out;
 
     &::placeholder {
-      color: darken($c-medium-light, 35);
+      color: darken($c-darken-medium-light, 35);
     }
 
     max-height: 41px;
@@ -42,7 +42,7 @@
     &:hover,
     &:focus {
       border: {
-        color: darken($c-medium-light, 35);
+        color: darken($c-darken-medium-light, 35);
       };
     }
   }

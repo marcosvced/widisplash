@@ -13,7 +13,7 @@ export default class Fade extends Vue {
 
 <style scoped lang="scss">
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+  transition: opacity .6s;
 }
 
 .fade-enter, .fade-leave-to {

@@ -21,7 +21,7 @@
         :type="'password'"
         :message="message"
         class="-mb-2"
-        @input="password = $event"
+        @input="value($event)"
       />
       <wd-button :text="'Sing in'" @click="checkPassword()" />
     </div>
@@ -41,22 +41,19 @@ import FirebaseModule from '~/modules/shared/Firebase.module'
 })
 export default class Index extends Vue {
   protected message: string = '';
+  protected password:string = '';
 
   protected checkPassword () {
     if (new PasswordModule(this.password || '').isValid) {
       FirebaseModule.anonymously()
-      this.password = ''
       return
     }
     this.message = 'The password isn\'t valid'
   }
 
-  get password (): string {
-    return this.$store.state.user.pass
-  }
-
-  set password (value: string) {
-    this.$store.commit('user/SET_PASSWORD', PasswordModule.areCharacterValid(value) ? value : PasswordModule.removeInvalidCharacters(value))
+  protected value (value: string) {
+    this.password = PasswordModule.areCharacterValid(value) ? value : PasswordModule.removeInvalidCharacters(value)
+    this.$forceUpdate()
   }
 }
 </script>

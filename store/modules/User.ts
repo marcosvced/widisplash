@@ -5,13 +5,9 @@ export const user = {
   state: {
     name: undefined,
     photo: undefined,
-    token: undefined,
-    pass: undefined
+    token: undefined
   } as UserModule,
   mutations: {
-    SET_PASSWORD (state: any, password: string) {
-      state.pass = password
-    },
     SET_TOKEN (state: any, token: string) {
       state.token = token
     },
@@ -26,7 +22,6 @@ export const user = {
   actions: {
     CLEAR (context: any) {
       context.commit('SET_NAME', undefined)
-      context.commit('SET_PASSWORD', undefined)
       context.commit('SET_PHOTO', undefined)
       context.commit('SET_TOKEN', undefined)
     }

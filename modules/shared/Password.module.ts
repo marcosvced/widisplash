@@ -1,26 +1,27 @@
 import { OPPOSITES_SYMBOLS, OPEN_PARENTHESIS, OPEN_BRACKETS, OPEN_BRACES } from '~/constants/Password.const'
 
 export default class PasswordModule extends String {
-  private _isBalancedParenthesis (): boolean {
+  private _isBalancedParentheses (): boolean {
     const opened: string[] = []
-    return !this.split('').reduce((index, char) => {
+    this.split('').forEach((char) => {
       switch (char) {
         case OPEN_PARENTHESIS:
         case OPEN_BRACKETS:
         case OPEN_BRACES:
           opened.push(char)
-          index = index + 1
           break
         default:
-          if (OPPOSITES_SYMBOLS[opened[index - 1]] === char) {
-            index = index - 1
+          // Only if the array opened has in the last position the opposite symbol of the iterated char
+          if (OPPOSITES_SYMBOLS[opened[opened.length - 1]] === char) {
+            opened.pop()
             break
           }
-          index = index + 1
+          // In other case the string contains a not balanced parentheses or any other character
+          opened.push(char)
           break
       }
-      return index
-    }, 0)
+    })
+    return !opened.length
   }
 
   private static _invalidChars (char: string): string | undefined {
@@ -57,6 +58,6 @@ export default class PasswordModule extends String {
   }
 
   public get isValid (): boolean {
-    return this._isBalancedParenthesis()
+    return this._isBalancedParentheses()
   }
 }

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@devler/aguia-scss": "^1.3.3",
+    "@devler/mouse": "^1.0.1",
     "@nuxt/typescript-runtime": "^0.4.10",
     "@nuxtjs/axios": "^5.11.0",
     "@nuxtjs/firebase": "^6.1.0",

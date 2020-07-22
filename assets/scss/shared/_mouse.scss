@@ -1,34 +1,5 @@
-$top_index: 1000;
-//$s_circle: 30px;
-
-.cursor {
+.m-cursor {
   position: absolute;
-  $this: &;
-
-  &-hidden {
-    opacity: 0;
-    width: 60px;
-    height: 60px;
-    transition: all .6s ease;
-  }
-
-  &-dark {
-    #{$this}__circle > svg > path {
-      stroke: #000;
-    }
-
-    #{$this}__point {
-      background: black;
-    }
-
-    &.cursor-hover {
-      #{$this}__circle > svg > path {
-        fill: #000;
-      }
-    }
-  }
-
-
   &__point {
     top: 0;
     left: 0;
@@ -37,21 +8,37 @@ $top_index: 1000;
     height: var(--point);
     pointer-events: none;
     user-select: none;
-    border: {
-      radius: 50%;
-      color: var(--point-color);
-      style: solid;
-      width: 2px;
-    }
-    z-index: $top_index;
+    z-index: 1000;
     backface-visibility: hidden;
     will-change: transform;
+    mix-blend-mode: exclusion;
+
+    &--inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 50%;
+      left: 50%;
+      border: {
+        radius: 50%;
+        width: 1px;
+        style: solid;
+        color: var(--color);
+      };
+      transform: translate(-50%, -50%) scale(1);
+      transition: transform .3s ease-in-out;
+    }
   }
 
-  &-hover {
-    .cursor__point {
-      opacity: .3;
+  &.-hover {
+    .m-cursor__point {
+      border: {
+        color: transparent;
+      };
+
+      &--inner {
+        transform: translate(-50%, -50%) scale(2);
+      }
     }
   }
 }
-

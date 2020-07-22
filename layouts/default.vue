@@ -2,28 +2,32 @@
   <div>
     <wd-header />
     <Nuxt />
-    <mouse-cursor :color="'#043353'" :point-size="12" />
+    <mouse :conf="mouseConf" />
   </div>
 </template>
 
 <style lang="scss">
 @import "assets/scss/main";
 </style>
-<script>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import MouseCursor from '~/components/shared/MouseCursor'
-import wdHeader from '~/components/molecules/Header'
+import { Mouse, Hover, Configuration } from '@devler/mouse'
+import wdHeader from '~/components/molecules/Header.vue'
 import FirebaseModule from '~/modules/shared/Firebase.module'
-
 @Component({
+  directives: {
+    Hover
+  },
   components: {
     wdHeader,
-    MouseCursor
+    Mouse
   }
 })
 export default class Default extends Vue {
+  protected mouseConf!:Configuration;
   beforeCreate () {
     FirebaseModule.authStateChanged(this.$router, this.$store)
+    this.mouseConf = new Configuration(12, '#043353')
   }
 }
 </script>

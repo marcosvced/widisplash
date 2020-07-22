@@ -840,6 +840,11 @@
   resolved "https://registry.yarnpkg.com/@devler/aguia-scss/-/aguia-scss-1.3.3.tgz#b2b3a097a51eef2090dd09589b1e9636b23101d5"
   integrity sha512-J2sNVglxzmkch3efjfuo/u02ZMWBqPEukRUrl2LZvqwLIRK8+MvaIBpWgOGP60a8EttZGV7D6rjNs8LCl4D4fw==
 
+"@devler/mouse@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@devler/mouse/-/mouse-1.0.1.tgz#8b8ae5ea5c1e1e9d536b2b9a7ab3413ab02f122e"
+  integrity sha512-C1Y/or9XZoSrQbdq7MViuwZCehcYAkpN+P9CuO85T06Kd8MDh3ctTfuzve19KtSqdI8x4aJ1XzgJa7aFhUxWGw==
+
 "@firebase/analytics-types@0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@firebase/analytics-types/-/analytics-types-0.3.1.tgz#3c5f5d71129c88295e17e914e34b391ffda1723c"

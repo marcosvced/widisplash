@@ -110,7 +110,7 @@ export default {
     }
   },
   env: {
-    ACCESS_KEY: process.env.UNSHPLASH_ACCESS_KEY || ''
+    ACCESS_KEY: process.env.UNSHPLASH_ACCESS_KEY || 'iisDN2VqLdUZehVJ3rrNMhzqZZ0H8koV84291_Q_82U'
   },
   generate: {
     fallback: true

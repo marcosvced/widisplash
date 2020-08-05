@@ -24,7 +24,7 @@ import FirebaseModule from '~/modules/shared/Firebase.module'
   }
 })
 export default class Default extends Vue {
-  protected mouseConf!:Configuration;
+  protected mouseConf!:any;
   beforeCreate () {
     FirebaseModule.authStateChanged(this.$router, this.$store)
     this.mouseConf = new Configuration(12, '#043353')

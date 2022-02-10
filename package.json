@@ -24,7 +24,7 @@
     "@types/unsplash-js": "^6.0.1",
     "firebase": "^7.16.0",
     "node-fetch": "^2.6.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.13.0",
     "sass-loader": "^9.0.2",
